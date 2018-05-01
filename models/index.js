@@ -1,23 +1,24 @@
-const Sequelize =require('sequelize');
-const sequelize = new Sequelize("sqlite:quizzes.sqlite");
- sequelize.define('quizzes',
-	{
-		question: {
-			type: DataTypes.STRING,
-			validate: {notEmpty: {msg: ""}}
-		},
-		answer: {
-			type: DataTypes.STRING,
-			validate: {notEmpty: {msg: ""}}
-		}
-	});
-};
+var quiz = require("./quiz");
 
+exports.quiz = quiz;
+
+const path = require('path');
+
+//Load ORM
+const Sequelize = require('sequelize');
+
+//To use SQLite data base
+const sequelize = new Sequelize("sqlite:quizzes.sqlite");
+
+//Import the definitiion of the Quiz Table from quiz.js
+sequelize.import(path.join(__dirname,'quiz'));
+
+//Create tables
 sequelize.sync()
-.then(() => sequelize.models.quizzes.count())
+.then(() => sequelize.models.quiz.count())
 .then(count => {
   if(!count){
-    return sequelize.models.quizzes.bulkCreate([
+    return sequelize.models.quiz.bulkCreate([
       {question: "Capital de Italia",
        answer: "Roma"},
       {question: "Capital de Francia",

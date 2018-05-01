@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Lista de Quizzes</title>
-</head>
-<body>
-<% var z = a[quizzes] %>
-   <% for(var i=0; i<z.length; i++) { %>
-           <li>
-          <%= z[i].Tweet %>
-           </li>
-</body>
-</html>
+
+<h1>Lista de quizzes:</h1>
+
+<table>
+    <% for (let i in quizzes) { %>
+    <% let quiz = quizzes[i]; %>
+    <tr>
+        <td>
+            Pregunta número
+            <%= quiz.answer%>:
+            <%= quiz.question%>
+        </td>
+    </tr>
+    <% } %>
+</table>
